@@ -1,8 +1,6 @@
-// Import Firebase modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
 
-// Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyAdfrFDBu0x4ZV2n0yohvFbtfK_GpdkmAw",
     authDomain: "article-2fc67.firebaseapp.com",
