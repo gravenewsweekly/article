@@ -1,7 +1,7 @@
 import { auth } from "./firebase-config.js";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
+import { createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
 
-// **Sign Up**
+// SIGN-UP
 document.getElementById("signup-form")?.addEventListener("submit", (e) => {
     e.preventDefault();
     const username = document.getElementById("username").value;
@@ -13,13 +13,15 @@ document.getElementById("signup-form")?.addEventListener("submit", (e) => {
             return updateProfile(userCredential.user, { displayName: username });
         })
         .then(() => {
-            alert("Account created successfully!");
+            alert("Sign-up successful! Redirecting...");
             window.location.href = "index.html";
         })
-        .catch((error) => alert(error.message));
+        .catch((error) => {
+            alert("Error: " + error.message);
+        });
 });
 
-// **Login**
+// LOGIN
 document.getElementById("login-form")?.addEventListener("submit", (e) => {
     e.preventDefault();
     const email = document.getElementById("email").value;
@@ -30,20 +32,7 @@ document.getElementById("login-form")?.addEventListener("submit", (e) => {
             alert("Login successful!");
             window.location.href = "index.html";
         })
-        .catch((error) => alert(error.message));
-});
-
-// **Check if User is Logged In**
-onAuthStateChanged(auth, (user) => {
-    const signupLink = document.getElementById("signup-link");
-    const loginLink = document.getElementById("login-link");
-    const userLink = document.getElementById("user-link");
-
-    if (user) {
-        signupLink.style.display = "none";
-        loginLink.style.display = "none";
-        userLink.style.display = "inline";
-        userLink.innerText = user.displayName || "Profile";
-        userLink.href = "dashboard.html";
-    }
+        .catch((error) => {
+            alert("Error: " + error.message);
+        });
 });
