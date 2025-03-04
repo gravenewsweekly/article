@@ -1,19 +1,18 @@
 import { auth } from "./firebase-config.js";
-import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
+import { signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
 
-// **Check if User is Logged In**
 onAuthStateChanged(auth, (user) => {
     if (user) {
-        document.getElementById("user-name").innerText = user.displayName;
+        document.getElementById("user-name").innerText = user.displayName || "User";
     } else {
-        window.location.href = "login.html";
+        window.location.href = "login.html"; // Redirect if not logged in
     }
 });
 
-// **Logout**
-document.getElementById("logout")?.addEventListener("click", () => {
+// LOGOUT
+document.getElementById("logout").addEventListener("click", () => {
     signOut(auth).then(() => {
-        alert("Logged out successfully!");
+        alert("Logged out!");
         window.location.href = "index.html";
     });
 });
